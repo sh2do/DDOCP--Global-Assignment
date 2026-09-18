@@ -50,11 +50,21 @@ namespace FitnessTracker
             { "Yoga", ("Duration (min)", "Difficulty (1-5)", "Avg heart rate") }
         };
 
+        // Minimalist Palette
+        private static readonly Color BgColor = Color.FromArgb(245, 247, 250);
+        private static readonly Color CardBg = Color.White;
+        private static readonly Color PrimaryColor = Color.FromArgb(41, 128, 185);
+        private static readonly Color PrimaryText = Color.FromArgb(44, 62, 80);
+        private static readonly Color SecondaryBtnBg = Color.FromArgb(236, 240, 241);
+
         public MainForm()
         {
             Text = "Fitness Tracker - Task 1 (Minimal)";
-            Size = new Size(800, 600);
+            Size = new Size(840, 680);
+            MinimumSize = new Size(800, 600);
             StartPosition = FormStartPosition.CenterScreen;
+            BackColor = BgColor;
+            Font = new Font("Segoe UI", 9.5f, FontStyle.Regular);
 
             InitializeLogin();
             InitializeRegister();
@@ -65,72 +75,224 @@ namespace FitnessTracker
 
         private void InitializeLogin()
         {
-            loginPanel = new Panel { Dock = DockStyle.Fill };
+            loginPanel = new Panel { Dock = DockStyle.Fill, BackColor = BgColor };
 
-            var lblUser = new Label { Text = "Username:", Location = new Point(200, 150), AutoSize = true };
-            txtLoginUser = new TextBox { Location = new Point(300, 145), Width = 200 };
-            var lblPass = new Label { Text = "Password:", Location = new Point(200, 190), AutoSize = true };
-            txtLoginPass = new TextBox { Location = new Point(300, 185), Width = 200, UseSystemPasswordChar = true };
-            btnLogin = new Button { Text = "Login", Location = new Point(300, 230) };
+            var card = new Panel
+            {
+                Size = new Size(380, 320),
+                BackColor = CardBg,
+                BorderStyle = BorderStyle.FixedSingle,
+                Location = new Point((Width - 380) / 2, 100)
+            };
+            loginPanel.SizeChanged += (s, e) =>
+            {
+                card.Location = new Point((loginPanel.Width - card.Width) / 2, Math.Max(40, (loginPanel.Height - card.Height) / 2));
+            };
+
+            var lblTitle = new Label
+            {
+                Text = "Fitness Tracker Sign In",
+                Font = new Font("Segoe UI", 14f, FontStyle.Bold),
+                ForeColor = PrimaryText,
+                Location = new Point(30, 25),
+                AutoSize = true
+            };
+
+            var lblUser = new Label { Text = "Username", Location = new Point(30, 75), AutoSize = true, ForeColor = PrimaryText };
+            txtLoginUser = new TextBox { Location = new Point(30, 95), Width = 318, Font = new Font("Segoe UI", 10f) };
+
+            var lblPass = new Label { Text = "Password", Location = new Point(30, 135), AutoSize = true, ForeColor = PrimaryText };
+            txtLoginPass = new TextBox { Location = new Point(30, 155), Width = 318, UseSystemPasswordChar = true, Font = new Font("Segoe UI", 10f) };
+
+            btnLogin = new Button
+            {
+                Text = "Sign In",
+                Location = new Point(30, 205),
+                Width = 150,
+                Height = 36,
+                BackColor = PrimaryColor,
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat
+            };
+            btnLogin.FlatAppearance.BorderSize = 0;
             btnLogin.Click += BtnLogin_Click;
-            btnShowRegister = new Button { Text = "Register", Location = new Point(380, 230) };
-            btnShowRegister.Click += (s, e) => ShowRegister();
-            lblLoginMsg = new Label { Location = new Point(300, 270), ForeColor = Color.Red, AutoSize = true };
 
-            loginPanel.Controls.AddRange(new Control[] { lblUser, txtLoginUser, lblPass, txtLoginPass, btnLogin, btnShowRegister, lblLoginMsg });
+            btnShowRegister = new Button
+            {
+                Text = "Register Account",
+                Location = new Point(195, 205),
+                Width = 153,
+                Height = 36,
+                BackColor = SecondaryBtnBg,
+                ForeColor = PrimaryText,
+                FlatStyle = FlatStyle.Flat
+            };
+            btnShowRegister.FlatAppearance.BorderSize = 0;
+            btnShowRegister.Click += (s, e) => ShowRegister();
+
+            lblLoginMsg = new Label { Location = new Point(30, 255), ForeColor = Color.Crimson, AutoSize = true };
+
+            card.Controls.AddRange(new Control[] { lblTitle, lblUser, txtLoginUser, lblPass, txtLoginPass, btnLogin, btnShowRegister, lblLoginMsg });
+            loginPanel.Controls.Add(card);
             Controls.Add(loginPanel);
         }
 
         private void InitializeRegister()
         {
-            registerPanel = new Panel { Dock = DockStyle.Fill, Visible = false };
-            var lblUser = new Label { Text = "New username:", Location = new Point(200, 150), AutoSize = true };
-            txtRegUser = new TextBox { Location = new Point(320, 145), Width = 200 };
-            var lblPass = new Label { Text = "Password (12 chars, 1 upper, 1 lower):", Location = new Point(200, 190), AutoSize = true };
-            txtRegPass = new TextBox { Location = new Point(440, 185), Width = 200, UseSystemPasswordChar = true };
-            btnRegister = new Button { Text = "Create Account", Location = new Point(320, 230) };
-            btnRegister.Click += BtnRegister_Click;
-            btnBackToLogin = new Button { Text = "Back", Location = new Point(440, 230) };
-            btnBackToLogin.Click += (s, e) => ShowLogin();
-            lblRegMsg = new Label { Location = new Point(320, 270), ForeColor = Color.Red, AutoSize = true };
+            registerPanel = new Panel { Dock = DockStyle.Fill, Visible = false, BackColor = BgColor };
 
-            registerPanel.Controls.AddRange(new Control[] { lblUser, txtRegUser, lblPass, txtRegPass, btnRegister, btnBackToLogin, lblRegMsg });
+            var card = new Panel
+            {
+                Size = new Size(460, 340),
+                BackColor = CardBg,
+                BorderStyle = BorderStyle.FixedSingle,
+                Location = new Point((Width - 460) / 2, 90)
+            };
+            registerPanel.SizeChanged += (s, e) =>
+            {
+                card.Location = new Point((registerPanel.Width - card.Width) / 2, Math.Max(40, (registerPanel.Height - card.Height) / 2));
+            };
+
+            var lblTitle = new Label
+            {
+                Text = "Create New Account",
+                Font = new Font("Segoe UI", 14f, FontStyle.Bold),
+                ForeColor = PrimaryText,
+                Location = new Point(30, 25),
+                AutoSize = true
+            };
+
+            var lblUser = new Label { Text = "Username", Location = new Point(30, 75), AutoSize = true, ForeColor = PrimaryText };
+            txtRegUser = new TextBox { Location = new Point(30, 95), Width = 398, Font = new Font("Segoe UI", 10f) };
+
+            var lblPass = new Label { Text = "Password (12 chars, 1 uppercase, 1 lowercase)", Location = new Point(30, 135), AutoSize = true, ForeColor = PrimaryText };
+            txtRegPass = new TextBox { Location = new Point(30, 155), Width = 398, UseSystemPasswordChar = true, Font = new Font("Segoe UI", 10f) };
+
+            btnRegister = new Button
+            {
+                Text = "Create Account",
+                Location = new Point(30, 210),
+                Width = 190,
+                Height = 36,
+                BackColor = PrimaryColor,
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat
+            };
+            btnRegister.FlatAppearance.BorderSize = 0;
+            btnRegister.Click += BtnRegister_Click;
+
+            btnBackToLogin = new Button
+            {
+                Text = "Back to Sign In",
+                Location = new Point(235, 210),
+                Width = 193,
+                Height = 36,
+                BackColor = SecondaryBtnBg,
+                ForeColor = PrimaryText,
+                FlatStyle = FlatStyle.Flat
+            };
+            btnBackToLogin.FlatAppearance.BorderSize = 0;
+            btnBackToLogin.Click += (s, e) => ShowLogin();
+
+            lblRegMsg = new Label { Location = new Point(30, 265), ForeColor = Color.Crimson, AutoSize = true };
+
+            card.Controls.AddRange(new Control[] { lblTitle, lblUser, txtRegUser, lblPass, txtRegPass, btnRegister, btnBackToLogin, lblRegMsg });
+            registerPanel.Controls.Add(card);
             Controls.Add(registerPanel);
         }
 
         private void InitializeMain()
         {
-            mainPanel = new Panel { Dock = DockStyle.Fill, Visible = false, AutoScroll = true };
-            lblWelcome = new Label { Text = "", Location = new Point(20, 20), AutoSize = true, Font = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold) };
-            var lblGoal = new Label { Text = "Set calorie goal:", Location = new Point(20, 60), AutoSize = true };
-            numGoal = new NumericUpDown { Location = new Point(140, 58), Width = 100, Minimum = 0, Maximum = 100000 };
-            btnSaveGoal = new Button { Text = "Save Goal", Location = new Point(260, 55) };
+            mainPanel = new Panel { Dock = DockStyle.Fill, Visible = false, AutoScroll = true, BackColor = BgColor };
+
+            var topCard = new Panel
+            {
+                Location = new Point(20, 20),
+                Width = 780,
+                Height = 85,
+                BackColor = CardBg,
+                BorderStyle = BorderStyle.FixedSingle
+            };
+
+            lblWelcome = new Label { Text = "", Location = new Point(20, 15), AutoSize = true, Font = new Font("Segoe UI", 12f, FontStyle.Bold), ForeColor = PrimaryText };
+            var lblGoal = new Label { Text = "Calorie Goal:", Location = new Point(20, 47), AutoSize = true, ForeColor = PrimaryText };
+            numGoal = new NumericUpDown { Location = new Point(110, 44), Width = 110, Minimum = 0, Maximum = 100000, Font = new Font("Segoe UI", 9.5f) };
+            btnSaveGoal = new Button
+            {
+                Text = "Save Goal",
+                Location = new Point(235, 42),
+                Width = 100,
+                Height = 28,
+                BackColor = PrimaryColor,
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat
+            };
+            btnSaveGoal.FlatAppearance.BorderSize = 0;
             btnSaveGoal.Click += BtnSaveGoal_Click;
 
-            int y = 100;
+            topCard.Controls.AddRange(new Control[] { lblWelcome, lblGoal, numGoal, btnSaveGoal });
+            mainPanel.Controls.Add(topCard);
+
+            int y = 115;
             foreach (var act in activities)
             {
-                var grp = new GroupBox { Text = act, Location = new Point(20, y), Width = 740, Height = 80 };
-                // use friendly labels when available
-                var labels = metricLabels.ContainsKey(act) ? metricLabels[act] : ("Metric1", "Metric2", "Metric3");
-                var lblA = new Label { Text = labels.m1 + ":", Location = new Point(10, 25), AutoSize = true };
-                var tA = new TextBox { Location = new Point(70, 22), Width = 120 };
-                var lblB = new Label { Text = labels.m2 + ":", Location = new Point(210, 25), AutoSize = true };
-                var tB = new TextBox { Location = new Point(270, 22), Width = 120 };
-                var lblC = new Label { Text = labels.m3 + ":", Location = new Point(410, 25), AutoSize = true };
-                var tC = new TextBox { Location = new Point(470, 22), Width = 120 };
+                var grp = new GroupBox
+                {
+                    Text = "  " + act + "  ",
+                    Location = new Point(20, y),
+                    Width = 780,
+                    Height = 80,
+                    BackColor = CardBg,
+                    Font = new Font("Segoe UI", 10f, FontStyle.Bold),
+                    ForeColor = PrimaryText
+                };
+
+                var labels = metricLabels.ContainsKey(act) ? metricLabels[act] : (m1: "Metric1", m2: "Metric2", m3: "Metric3");
+
+                var lblA = new Label { Text = labels.m1 + ":", Location = new Point(15, 32), AutoSize = true, Font = new Font("Segoe UI", 9f, FontStyle.Regular), ForeColor = PrimaryText };
+                var tA = new TextBox { Location = new Point(110, 28), Width = 120, Font = new Font("Segoe UI", 9.5f, FontStyle.Regular) };
+
+                var lblB = new Label { Text = labels.m2 + ":", Location = new Point(265, 32), AutoSize = true, Font = new Font("Segoe UI", 9f, FontStyle.Regular), ForeColor = PrimaryText };
+                var tB = new TextBox { Location = new Point(365, 28), Width = 120, Font = new Font("Segoe UI", 9.5f, FontStyle.Regular) };
+
+                var lblC = new Label { Text = labels.m3 + ":", Location = new Point(520, 32), AutoSize = true, Font = new Font("Segoe UI", 9f, FontStyle.Regular), ForeColor = PrimaryText };
+                var tC = new TextBox { Location = new Point(625, 28), Width = 120, Font = new Font("Segoe UI", 9.5f, FontStyle.Regular) };
+
                 grp.Controls.AddRange(new Control[] { lblA, tA, lblB, tB, lblC, tC });
                 mainPanel.Controls.Add(grp);
                 activityInputs[act] = (tA, tB, tC);
                 y += 90;
             }
 
-            btnCalculate = new Button { Text = "Calculate Calories", Location = new Point(20, y) };
-            btnCalculate.Click += BtnCalculate_Click;
-            lblTotal = new Label { Text = "Total: 0", Location = new Point(160, y+5), AutoSize = true };
-            lblGoalStatus = new Label { Text = "", Location = new Point(260, y+5), AutoSize = true, Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Bold) };
+            var bottomCard = new Panel
+            {
+                Location = new Point(20, y),
+                Width = 780,
+                Height = 65,
+                BackColor = CardBg,
+                BorderStyle = BorderStyle.FixedSingle
+            };
 
-            mainPanel.Controls.AddRange(new Control[] { lblWelcome, lblGoal, numGoal, btnSaveGoal, btnCalculate, lblTotal, lblGoalStatus });
+            btnCalculate = new Button
+            {
+                Text = "Calculate Calories",
+                Location = new Point(15, 14),
+                Width = 160,
+                Height = 36,
+                BackColor = PrimaryColor,
+                ForeColor = Color.White,
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Segoe UI", 9.5f, FontStyle.Bold)
+            };
+            btnCalculate.FlatAppearance.BorderSize = 0;
+            btnCalculate.Click += BtnCalculate_Click;
+
+            lblTotal = new Label { Text = "Total: 0", Location = new Point(190, 23), AutoSize = true, Font = new Font("Segoe UI", 10.5f, FontStyle.Bold), ForeColor = PrimaryText };
+            lblGoalStatus = new Label { Text = "", Location = new Point(410, 23), AutoSize = true, Font = new Font("Segoe UI", 10f, FontStyle.Bold) };
+
+            bottomCard.Controls.AddRange(new Control[] { btnCalculate, lblTotal, lblGoalStatus });
+            mainPanel.Controls.Add(bottomCard);
+
             Controls.Add(mainPanel);
         }
 
@@ -165,7 +327,7 @@ namespace FitnessTracker
         {
             var user = txtRegUser.Text.Trim();
             var pass = txtRegPass.Text;
-            lblRegMsg.ForeColor = Color.Red;
+            lblRegMsg.ForeColor = Color.Crimson;
             if (!Regex.IsMatch(user, "^[a-zA-Z0-9]+$"))
             {
                 lblRegMsg.Text = "Username must contain only letters and numbers.";
@@ -173,7 +335,7 @@ namespace FitnessTracker
             }
             if (pass.Length != 12 || !pass.Any(char.IsUpper) || !pass.Any(char.IsLower))
             {
-                lblRegMsg.Text = "Password must be exactly 12 characters and include at least one uppercase and one lowercase letter.";
+                lblRegMsg.Text = "Password must be 12 chars (1 upper, 1 lower).";
                 return;
             }
             if (DataStore.Find(user) != null)
@@ -183,7 +345,7 @@ namespace FitnessTracker
             }
             DataStore.Users.Add(new User { Username = user, Password = pass });
             DataStore.Save();
-            lblRegMsg.ForeColor = Color.Green;
+            lblRegMsg.ForeColor = Color.DarkGreen;
             lblRegMsg.Text = "Account created. You can log in now.";
         }
 
@@ -191,7 +353,7 @@ namespace FitnessTracker
         {
             if (DateTime.Now < lockoutUntil)
             {
-                lblLoginMsg.Text = $"Too many failed attempts. Please try again at {lockoutUntil:T}.";
+                lblLoginMsg.Text = $"Too many failed attempts. Try again at {lockoutUntil:T}.";
                 return;
             }
 
@@ -210,8 +372,8 @@ namespace FitnessTracker
                 failedAttempts++;
                 if (failedAttempts >= 5)
                 {
-                    lockoutUntil = DateTime.Now.AddSeconds(30); // temporary lockout
-                    lblLoginMsg.Text = "Too many failed attempts. Login disabled for 30 seconds.";
+                    lockoutUntil = DateTime.Now.AddSeconds(30);
+                    lblLoginMsg.Text = "Too many failed attempts. Disabled for 30 seconds.";
                 }
                 else
                 {
@@ -227,7 +389,7 @@ namespace FitnessTracker
             if (u == null) return;
             u.GoalCalories = (int)numGoal.Value;
             DataStore.Save();
-            MessageBox.Show("Goal saved.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Goal saved successfully.", "Goal Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void BtnCalculate_Click(object? sender, EventArgs e)
@@ -248,13 +410,13 @@ namespace FitnessTracker
             {
                 if (total >= u.GoalCalories)
                 {
-                    lblGoalStatus.ForeColor = Color.Green;
-                    lblGoalStatus.Text = "Congratulations — goal achieved!";
+                    lblGoalStatus.ForeColor = Color.DarkGreen;
+                    lblGoalStatus.Text = "Goal achieved!";
                 }
                 else
                 {
-                    lblGoalStatus.ForeColor = Color.Black;
-                    lblGoalStatus.Text = $"Goal not yet achieved: {u.GoalCalories - (int)total} cal remaining.";
+                    lblGoalStatus.ForeColor = PrimaryText;
+                    lblGoalStatus.Text = $"Goal in progress: {u.GoalCalories - (int)total} cal remaining.";
                 }
             }
             else
@@ -269,20 +431,19 @@ namespace FitnessTracker
             return 0;
         }
 
-        // Minimal, research-inspired simple formulas using three metrics
         private static double CalculateForActivity(string activity, double m1, double m2, double m3)
         {
-            // m1,m2,m3 are the three metrics for each activity (interpretation depends on activity)
             return activity switch
             {
-                "Walking" => m2 * 50 + m1 * 0.03 + m3 * 0.1, // distance(km)*50 + steps*0.03 + avgHR*0.1
-                "Swimming" => m1 * 8 + m2 * 5 + m3 * 0.1, // time(min)*8 + laps*5 + avgHR*0.1
-                "Running" => m1 * 70 + m2 * 5 + m3 * 0.1, // distance(km)*70 + time(min)*5 + avgHR*0.1
-                "Cycling" => m1 * 35 + m2 * 6 + m3 * 0.1, // distance(km)*35 + time(min)*6 + avgHR*0.1
-                "Rowing" => m2 * 9 + m1 * 0.02 + m3 * 0.1, // time(min)*9 + strokes*0.02 + avgHR*0.1
-                "Yoga" => m1 * 3 + m2 * 20 + m3 * 0.05, // duration(min)*3 + difficulty(1-5)*20 + avgHR*0.05
+                "Walking" => m2 * 50 + m1 * 0.03 + m3 * 0.1,
+                "Swimming" => m1 * 8 + m2 * 5 + m3 * 0.1,
+                "Running" => m1 * 70 + m2 * 5 + m3 * 0.1,
+                "Cycling" => m1 * 35 + m2 * 6 + m3 * 0.1,
+                "Rowing" => m2 * 9 + m1 * 0.02 + m3 * 0.1,
+                "Yoga" => m1 * 3 + m2 * 20 + m3 * 0.05,
                 _ => 0
             };
         }
     }
 }
+
