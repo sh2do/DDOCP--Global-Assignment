@@ -1,0 +1,17 @@
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\bin\Debug\net10.0-windows\DDocp project.exe
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\bin\Debug\net10.0-windows\DDocp project.deps.json
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\bin\Debug\net10.0-windows\DDocp project.runtimeconfig.json
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\bin\Debug\net10.0-windows\DDocp project.dll
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\bin\Debug\net10.0-windows\DDocp project.pdb
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\obj\Debug\net10.0-windows\DDocp_project.Form1.resources
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\obj\Debug\net10.0-windows\DDocp project.csproj.GenerateResource.cache
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\obj\Debug\net10.0-windows\DDocp project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\obj\Debug\net10.0-windows\DDocp project.AssemblyInfoInputs.cache
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\obj\Debug\net10.0-windows\DDocp project.AssemblyInfo.cs
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\obj\Debug\net10.0-windows\DDocp project.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\obj\Debug\net10.0-windows\DDocp project.dll
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\obj\Debug\net10.0-windows\refint\DDocp project.dll
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\obj\Debug\net10.0-windows\DDocp project.pdb
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\obj\Debug\net10.0-windows\DDocp project.genruntimeconfig.cache
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\obj\Debug\net10.0-windows\ref\DDocp project.dll
+C:\Users\Administrator\source\repos\sh2do\DDocp project\DDocp project\obj\Debug\net10.0-windows\DDocp pr.0D8EAADB.Up2Date

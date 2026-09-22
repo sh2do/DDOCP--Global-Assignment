@@ -1,0 +1,28 @@
+{
+  "Users": [
+    {
+      "Username": "kkk",
+      "PasswordHash": "DD843AA2A40C539E2C436F15FF9A6FF1BB394C6778A8419DF155F02ABCC496A7",
+      "GoalCalories": 0,
+      "ActivityRecords": []
+    },
+    {
+      "Username": "kkk6",
+      "PasswordHash": "5069102171BA16199F2541D791931EDA82F5F0A0B0B2EF931B45902AC815F213",
+      "GoalCalories": 0,
+      "ActivityRecords": []
+    },
+    {
+      "Username": "kkk46",
+      "PasswordHash": "83376E3B7BC033EB530490AE16A108B525303310B76BBDDFF99F03DC4B9FD901",
+      "GoalCalories": 0,
+      "ActivityRecords": []
+    },
+    {
+      "Username": "zai",
+      "PasswordHash": "E59E19024CA36D824B1762693F52CCBB47405A9AA9CCE5273674E92784589FFE",
+      "GoalCalories": 0,
+      "ActivityRecords": []
+    }
+  ]
+}
